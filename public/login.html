@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Lost &amp; Found Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-title">Lost &amp; Found Portal — <span id="station-name">City Police Station</span></a>
+      <button class="nav-toggle screen-only" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="main-nav screen-only" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link">Report Lost Property</a>
+        <a href="report-unclaimed.html" class="nav-link">Report Unclaimed Property</a>
+        <a href="dashboard.html" class="nav-link" id="nav-dashboard" style="display:none;">My Reports</a>
+        <a href="police-dashboard.html" class="nav-link" id="nav-police-dashboard" style="display:none;">Police Dashboard</a>
+        <a href="login.html" class="nav-link active" id="nav-login">Login / Register</a>
+        <a href="#" class="nav-link" id="nav-logout" style="display:none;" data-action="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="auth-section">
+      <div class="container container-narrow">
+        <h1>Citizen / Officer Login</h1>
+        <p class="auth-subtitle">Sign in to manage your reports, submit claims, and track your property.</p>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" name="email" required autocomplete="email" placeholder="you@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+          </div>
+
+          <div id="login-error" class="form-error" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+
+        <p class="auth-alt">Don't have an account? <a href="register.html">Register</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-disclaimer">This portal is a public service for registering lost and unclaimed property. It does <strong>not</strong> constitute a First Information Report (FIR). For theft, robbery, or any criminal matter, please visit your nearest police station.</p>
+      <p class="footer-dpdp">Your personal data is processed in accordance with the Digital Personal Data Protection (DPDP) Act, 2023. Data is used solely for lost property registration and matching, retained for 12 months, and you may request deletion at any time from your account.</p>
+      <p class="footer-copy">&copy; <span id="footer-year">2024</span> Lost &amp; Found Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

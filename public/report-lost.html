@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Lost Property — Lost &amp; Found Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-title">Lost &amp; Found Portal — <span id="station-name">City Police Station</span></a>
+      <button class="nav-toggle screen-only" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="main-nav screen-only" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link active">Report Lost Property</a>
+        <a href="report-unclaimed.html" class="nav-link">Report Unclaimed Property</a>
+        <a href="dashboard.html" class="nav-link" id="nav-dashboard" style="display:none;">My Reports</a>
+        <a href="police-dashboard.html" class="nav-link" id="nav-police-dashboard" style="display:none;">Police Dashboard</a>
+        <a href="login.html" class="nav-link" id="nav-login">Login / Register</a>
+        <a href="#" class="nav-link" id="nav-logout" style="display:none;" data-action="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <div class="container container-narrow">
+        <h1>Report Lost Property</h1>
+        <p class="form-subtitle">Fill this form to register a lost property report at the police station.</p>
+
+        <form id="report-lost-form" novalidate>
+
+          <!-- Applicant Details -->
+          <fieldset class="form-fieldset">
+            <legend>Applicant Details</legend>
+
+            <div class="form-group">
+              <label for="applicant-name">Full Name <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="applicant-name" name="applicant_name" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="applicant-address">Address <span class="required" aria-label="required">*</span></label>
+              <textarea id="applicant-address" name="address" required rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="applicant-phone">Phone Number <span class="required" aria-label="required">*</span></label>
+              <input type="tel" id="applicant-phone" name="phone" required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number" autocomplete="tel">
+            </div>
+
+            <div class="form-group">
+              <label for="id-proof-type">ID Proof Type <span class="required" aria-label="required">*</span></label>
+              <select id="id-proof-type" name="id_proof_type" required>
+                <option value="">Select ID Proof</option>
+                <option value="Aadhaar Card">Aadhaar Card</option>
+                <option value="PAN Card">PAN Card</option>
+                <option value="Driving License">Driving License</option>
+                <option value="Voter ID">Voter ID</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="id-proof-number">ID Proof Number <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="id-proof-number" name="id_proof_number" required placeholder="Enter full number — only last 4 digits will be stored">
+              <small class="form-help">For your privacy, only the last 4 digits of your ID will be stored (DPDP Act compliance).</small>
+            </div>
+          </fieldset>
+
+          <!-- Property Details -->
+          <fieldset class="form-fieldset">
+            <legend>Property Details</legend>
+
+            <div class="form-group">
+              <label for="prop-category">Category <span class="required" aria-label="required">*</span></label>
+              <select id="prop-category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Documents">Documents</option>
+                <option value="Electronic Devices">Electronic Devices</option>
+                <option value="Bags & Luggage">Bags &amp; Luggage</option>
+                <option value="Wallet / Purse">Wallet / Purse</option>
+                <option value="Keys">Keys</option>
+                <option value="Jewellery">Jewellery</option>
+                <option value="Vehicles">Vehicles</option>
+                <option value="Books / Stationery">Books / Stationery</option>
+                <option value="Clothing / Accessories">Clothing / Accessories</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="prop-title">Item Title <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="prop-title" name="title" required maxlength="100" placeholder="e.g., Blue Samsung Galaxy S23">
+            </div>
+
+            <div class="form-group">
+              <label for="prop-description">Detailed Description <span class="required" aria-label="required">*</span></label>
+              <textarea id="prop-description" name="description" required minlength="20" rows="4" placeholder="Describe the item in detail — colour, brand, marks, contents, etc."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prop-date-lost">Date Lost <span class="required" aria-label="required">*</span></label>
+                <input type="date" id="prop-date-lost" name="date_lost" required>
+              </div>
+              <div class="form-group">
+                <label for="prop-time-lost">Approximate Time</label>
+                <input type="time" id="prop-time-lost" name="time_lost">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prop-location">Location Where Lost <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="prop-location" name="location_lost" required placeholder="e.g., Central Market, MG Road, Sector 17">
+            </div>
+
+            <div class="form-group">
+              <label for="prop-circumstances">Circumstances / How Lost <span class="required" aria-label="required">*</span></label>
+              <textarea id="prop-circumstances" name="how_lost" required rows="3" placeholder="Describe how you lost the property"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="prop-station">Police Station / Jurisdiction <span class="required" aria-label="required">*</span></label>
+              <select id="prop-station" name="police_station" required>
+                <option value="">Select Police Station</option>
+                <option value="Kotwali Police Station, Lucknow">Kotwali Police Station, Lucknow</option>
+                <option value="Hazratganj Police Station, Lucknow">Hazratganj Police Station, Lucknow</option>
+                <option value="Charbagh Railway Police Station, Lucknow">Charbagh Railway Police Station, Lucknow</option>
+                <option value="Gomti Nagar Police Station, Lucknow">Gomti Nagar Police Station, Lucknow</option>
+                <option value="Mahanagar Police Station, Lucknow">Mahanagar Police Station, Lucknow</option>
+                <option value="Aliganj Police Station, Lucknow">Aliganj Police Station, Lucknow</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="prop-image">Upload Image</label>
+              <input type="file" id="prop-image" name="image" accept=".jpg,.jpeg,.png">
+              <small class="form-help">Accepted formats: JPG, PNG. Maximum size: 2 MB.</small>
+            </div>
+          </fieldset>
+
+          <!-- Declaration & Consent -->
+          <fieldset class="form-fieldset">
+            <legend>Declaration &amp; Consent</legend>
+
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="declaration" name="declaration" required>
+                I declare that the information provided is true to the best of my knowledge. I understand that filing a false report is a punishable offence under applicable law.
+              </label>
+            </div>
+
+            <div class="consent-notice">
+              <p><strong>Data Processing Notice</strong></p>
+              <p>Your data will be used only to process this lost property report and to match with unclaimed property. Data will be retained for 12 months. You can request deletion anytime from your account.</p>
+              <p><strong>Purpose:</strong> Lost property registration and matching.<br>
+              <strong>Legal basis:</strong> Consent under DPDP Act, 2023.</p>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="consent" name="consent" required>
+                I consent to the processing of my data as described above.
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="form-error" class="form-error" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn-primary btn-block">Submit Lost Property Report</button>
+        </form>
+
+        <!-- Acknowledgement Slip (shown by JS after successful submission) -->
+        <div id="acknowledgement-slip" style="display:none;">
+          <div class="ack-slip">
+            <h2>ACKNOWLEDGEMENT SLIP — LOST PROPERTY REPORT</h2>
+            <table class="ack-table">
+              <tr>
+                <th>Registration Number</th>
+                <td id="ack-reg-number"></td>
+              </tr>
+              <tr>
+                <th>Date of Registration</th>
+                <td id="ack-date"></td>
+              </tr>
+              <tr>
+                <th>Applicant Name</th>
+                <td id="ack-name"></td>
+              </tr>
+              <tr>
+                <th>Item</th>
+                <td id="ack-item"></td>
+              </tr>
+              <tr>
+                <th>Category</th>
+                <td id="ack-category"></td>
+              </tr>
+              <tr>
+                <th>Location Where Lost</th>
+                <td id="ack-location"></td>
+              </tr>
+            </table>
+
+            <div class="ack-disclaimer">
+              <p>⚠ <strong>IMPORTANT:</strong> This is a computer-generated acknowledgement for lost property registration. This is <strong>NOT</strong> a First Information Report (FIR). For theft, robbery, or any criminal matter, please visit your nearest police station and file an FIR.</p>
+            </div>
+
+            <button type="button" class="btn btn-primary screen-only" onclick="window.print()">Print Acknowledgement</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-disclaimer">This portal is a public service for registering lost and unclaimed property. It does <strong>not</strong> constitute a First Information Report (FIR). For theft, robbery, or any criminal matter, please visit your nearest police station.</p>
+      <p class="footer-dpdp">Your personal data is processed in accordance with the Digital Personal Data Protection (DPDP) Act, 2023. Data is used solely for lost property registration and matching, retained for 12 months, and you may request deletion at any time from your account.</p>
+      <p class="footer-copy">&copy; <span id="footer-year">2024</span> Lost &amp; Found Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

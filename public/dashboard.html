@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Dashboard — Lost &amp; Found Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body data-page="dashboard">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-title">Lost &amp; Found Portal — <span id="station-name">City Police Station</span></a>
+      <button class="nav-toggle screen-only" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="main-nav screen-only" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link">Report Lost Property</a>
+        <a href="report-unclaimed.html" class="nav-link">Report Unclaimed Property</a>
+        <a href="dashboard.html" class="nav-link active" id="nav-dashboard">My Reports</a>
+        <a href="police-dashboard.html" class="nav-link" id="nav-police-dashboard" style="display:none;">Police Dashboard</a>
+        <a href="login.html" class="nav-link" id="nav-login" style="display:none;">Login / Register</a>
+        <a href="#" class="nav-link" id="nav-logout" data-action="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="citizen-dashboard">
+      <div class="container">
+
+        <div class="dashboard-header mb-4">
+          <div class="flex-between flex-wrap" style="align-items: flex-start; gap: 1rem;">
+            <div>
+              <h1>Citizen Self-Service Dashboard</h1>
+              <p class="text-secondary" style="margin-top: 0.25rem;">
+                Track your registered Lost Property reports, download acknowledgement slips, and exercise data privacy rights under the Digital Personal Data Protection (DPDP) Act, 2023.
+              </p>
+            </div>
+            <div>
+              <a href="report-lost.html" class="btn btn-primary">+ Report Lost Property</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CCTNS Legal Disclaimer Banner -->
+        <div class="disclaimer-box mb-4" style="border-left: 4px solid var(--warning); background: var(--warning-bg); padding: 1rem 1.25rem;">
+          <h4 style="color: var(--warning); margin-bottom: 0.25rem;">⚖ Police Department Legal Notice</h4>
+          <p style="font-size: 0.95rem; line-height: 1.5;">
+            Reports filed through this portal generate an administrative <strong>Lost Property Registration Number</strong> for civil documentation and reconciliation with unclaimed articles. <strong>This is NOT a First Information Report (FIR).</strong> If your property was stolen, robbed, or lost in connection with an offence, you must register an FIR in person at your jurisdictional police station.
+          </p>
+        </div>
+
+        <!-- Dashboard Content Tabs -->
+        <div class="tab-nav mb-3">
+          <button type="button" class="tab-btn active" data-tab="tab-my-reports">My Lost Property Reports</button>
+          <button type="button" class="tab-btn" data-tab="tab-privacy">Data Protection &amp; Deletion Rights</button>
+        </div>
+
+        <!-- Tab 1: My Reports Table -->
+        <div class="tab-content active" id="tab-my-reports">
+          <div class="table-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-dark); background: rgba(0,0,0,0.02);">
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Registration No</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Title</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Type</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Status</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Date Filed</th>
+                  <th style="padding: 0.85rem 1rem; text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="my-reports-body">
+                <tr>
+                  <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-secondary);">Loading your registered reports…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: DPDP Privacy & Deletion -->
+        <div class="tab-content" id="tab-privacy">
+          <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; max-width: 800px;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">DPDP Act, 2023 Compliance &amp; Rights</h2>
+            
+            <p style="margin-bottom: 1rem;">
+              As a citizen reporting to this Police Station portal, your personal data is protected under the <strong>Digital Personal Data Protection Act, 2023</strong>:
+            </p>
+
+            <ul style="list-style: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.8;">
+              <li><strong>Data Minimization:</strong> Your national identity proofs (Aadhaar, PAN, DL, Voter ID) are never stored in full. Only the document type and masked last 4 digits (e.g. <code>XXXX-XXXX-1234</code>) are recorded.</li>
+              <li><strong>Purpose Limitation:</strong> Collected contact and circumstance details are utilized strictly for lost-and-found reconciliation and legal verification.</li>
+              <li><strong>Retention Policy:</strong> All registered records are retained for a statutory period of <strong>12 months</strong>, after which they are marked for automatic archival and anonymization.</li>
+              <li><strong>Right to Erasure / Deletion:</strong> You have the legal right to revoke consent and request deletion of your personal records from this system.</li>
+            </ul>
+
+            <div style="background: var(--consent-bg); border: 1px solid rgba(0,0,0,0.12); padding: 1.25rem; border-radius: var(--radius); margin-bottom: 1.5rem;">
+              <h4 style="margin-bottom: 0.5rem;">Request Immediate Data Deletion</h4>
+              <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--text-secondary);">
+                Submitting a deletion request will immediately remove your reports from public listing, initiate a 30-day statutory grace window, and anonymize all personal identifiers across station registers in compliance with DPDP principles.
+              </p>
+              <button type="button" class="btn btn-danger" id="request-deletion">
+                Request Data Deletion (DPDP Act)
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-disclaimer">This portal is a public service for registering lost and unclaimed property. It does <strong>not</strong> constitute a First Information Report (FIR). For theft, robbery, or any criminal matter, please visit your nearest police station.</p>
+      <p class="footer-dpdp">Your personal data is processed in accordance with the Digital Personal Data Protection (DPDP) Act, 2023. Data is used solely for lost property registration and matching, retained for 12 months, and you may request deletion at any time from your account.</p>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Police Station Lost &amp; Found Portal. Government prototype for academic demonstration.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

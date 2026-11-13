@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Station Dashboard — Lost &amp; Found Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body data-page="police-dashboard">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-title">Lost &amp; Found Portal — <span id="station-name">Police Station Duty Desk</span></a>
+      <button class="nav-toggle screen-only" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="main-nav screen-only" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="report-lost.html" class="nav-link">Report Lost Property</a>
+        <a href="report-unclaimed.html" class="nav-link">Report Unclaimed Property</a>
+        <a href="dashboard.html" class="nav-link" id="nav-dashboard" style="display:none;">My Reports</a>
+        <a href="police-dashboard.html" class="nav-link active" id="nav-police-dashboard">Police Dashboard</a>
+        <a href="login.html" class="nav-link" id="nav-login" style="display:none;">Login / Register</a>
+        <a href="#" class="nav-link" id="nav-logout" data-action="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="police-dashboard">
+      <div class="container">
+
+        <!-- Top Header & Station Filter -->
+        <div class="flex-between flex-wrap mb-4" style="align-items: flex-end; gap: 1rem;">
+          <div>
+            <h1>Police Station Dashboard</h1>
+            <p class="text-secondary" style="margin-top: 0.25rem;">
+              CCTNS-compatible Lost &amp; Unclaimed Property Register Management • Official Police Custody Records
+            </p>
+          </div>
+          <div class="form-group" style="margin-bottom: 0; min-width: 280px;">
+            <label for="station-filter" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Jurisdiction / Station</label>
+            <select id="station-filter" name="station" class="form-control" style="width: 100%; padding: 0.5rem 0.75rem;">
+              <option value="">All Assigned Stations</option>
+              <option value="Kotwali Police Station, Lucknow" selected>Kotwali Police Station, Lucknow</option>
+              <option value="Hazratganj Police Station, Lucknow">Hazratganj Police Station, Lucknow</option>
+              <option value="Charbagh Railway Police Station, Lucknow">Charbagh Railway Police Station, Lucknow</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Stats Overview Cards -->
+        <div class="stats-grid mb-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid #D9534F; padding: 1.25rem; border-radius: var(--radius);">
+            <div class="stat-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 600;">Lost Property Reports</div>
+            <div class="stat-value" id="stat-lost" style="font-size: 2.25rem; font-family: var(--font-heading); font-weight: 700; color: #D9534F; margin-top: 0.25rem;">—</div>
+          </div>
+          <div class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid #5BC0DE; padding: 1.25rem; border-radius: var(--radius);">
+            <div class="stat-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 600;">Property in Custody</div>
+            <div class="stat-value" id="stat-unclaimed" style="font-size: 2.25rem; font-family: var(--font-heading); font-weight: 700; color: #31708F; margin-top: 0.25rem;">—</div>
+          </div>
+          <div class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid #5CB85C; padding: 1.25rem; border-radius: var(--radius);">
+            <div class="stat-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 600;">Returned to Owner</div>
+            <div class="stat-value" id="stat-returned" style="font-size: 2.25rem; font-family: var(--font-heading); font-weight: 700; color: #3C763D; margin-top: 0.25rem;">—</div>
+          </div>
+          <div class="stat-card" style="background: var(--bg-card); border: 1px solid var(--border); border-top: 3px solid #F0AD4E; padding: 1.25rem; border-radius: var(--radius);">
+            <div class="stat-label" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); font-weight: 600;">Pending Claims</div>
+            <div class="stat-value" id="stat-pending-claims" style="font-size: 2.25rem; font-family: var(--font-heading); font-weight: 700; color: #8A6D3B; margin-top: 0.25rem;">—</div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tab-nav mb-3">
+          <button type="button" class="tab-btn active" data-tab="tab-properties">Property Register</button>
+          <button type="button" class="tab-btn" data-tab="tab-claims">Citizen Claims</button>
+          <button type="button" class="tab-btn" data-tab="tab-matches">Match Suggestions</button>
+          <button type="button" class="tab-btn" data-tab="tab-audit">Station Audit Trail</button>
+          <button type="button" class="tab-btn" data-tab="tab-certificate">Generate Acknowledgement Slip</button>
+        </div>
+
+        <!-- TAB 1: PROPERTIES REGISTER -->
+        <div class="tab-content active" id="tab-properties">
+          <div class="table-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-dark); background: rgba(0,0,0,0.02);">
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Reg No</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Title / Description</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Type</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Status</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Station</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Date</th>
+                  <th style="padding: 0.85rem 1rem; text-align: right;">Police Actions</th>
+                </tr>
+              </thead>
+              <tbody id="properties-body">
+                <tr>
+                  <td colspan="7" class="text-center" style="padding: 2rem; color: var(--text-secondary);">Loading station property register…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: CITIZEN CLAIMS -->
+        <div class="tab-content" id="tab-claims">
+          <div class="table-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-dark); background: rgba(0,0,0,0.02);">
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Claim ID</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Property Reg No</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Claimant Name</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Ownership Description</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Filed Date</th>
+                  <th style="padding: 0.85rem 1rem; text-align: right;">Officer Action</th>
+                </tr>
+              </thead>
+              <tbody id="claims-body">
+                <tr>
+                  <td colspan="6" class="text-center" style="padding: 2rem; color: var(--text-secondary);">Loading claim requests…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: MATCH SUGGESTIONS -->
+        <div class="tab-content" id="tab-matches">
+          <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;">
+            <div class="mb-3">
+              <h3>Automated Keyword &amp; Proximity Match Engine</h3>
+              <p class="text-secondary" style="font-size: 0.95rem;">
+                Select "Matches" from any property in the Property Register to view candidate Lost ↔ Unclaimed property pairs ranked by keyword overlap, category, and date proximity.
+              </p>
+            </div>
+            <div id="matches-list">
+              <p style="color: var(--text-secondary); font-style: italic;">
+                Click the <strong>Matches</strong> button next to any property in the Property Register tab to evaluate candidate items.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: AUDIT LOG -->
+        <div class="tab-content" id="tab-audit">
+          <div class="table-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-dark); background: rgba(0,0,0,0.02);">
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Timestamp (UTC)</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Officer / User</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Action Taken</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Property ID</th>
+                  <th style="padding: 0.85rem 1rem; text-align: left;">Value Change</th>
+                </tr>
+              </thead>
+              <tbody id="audit-body">
+                <tr>
+                  <td colspan="5" class="text-center" style="padding: 2rem; color: var(--text-secondary);">Loading station audit log…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 5: CERTIFICATE GENERATION -->
+        <div class="tab-content" id="tab-certificate">
+          <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; max-width: 800px;">
+            <h3 style="margin-bottom: 0.5rem;">Generate Official Police Acknowledgement Slip</h3>
+            <p class="text-secondary mb-3" style="font-size: 0.95rem;">
+              Produce a standardized, printable computer-generated acknowledgement for insurance claims or official citizen documentation.
+            </p>
+
+            <form id="certificate-form" class="mb-4">
+              <div class="form-group" style="max-width: 400px;">
+                <label for="cert-prop-id">Property Database ID</label>
+                <input type="number" id="cert-prop-id" name="certificate_property_id" required placeholder="e.g. 1, 2, 3" style="width: 100%; padding: 0.65rem 0.85rem;">
+                <small class="text-secondary" style="display: block; margin-top: 0.25rem;">Enter the numeric ID from the Property Register.</small>
+              </div>
+              <button type="submit" class="btn btn-primary">Generate Official Acknowledgement</button>
+            </form>
+
+            <div id="certificate-output" class="print-area" style="margin-top: 2rem;">
+              <!-- Generated Certificate will render here -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-disclaimer">This portal is a public service for registering lost and unclaimed property. It does <strong>not</strong> constitute a First Information Report (FIR). For theft, robbery, or any criminal matter, please visit your nearest police station.</p>
+      <p class="footer-dpdp">Your personal data is processed in accordance with the Digital Personal Data Protection (DPDP) Act, 2023. Data is used solely for lost property registration and matching, retained for 12 months, and you may request deletion at any time from your account.</p>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Police Station Lost &amp; Found Portal • Confidential Police Duty Records</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

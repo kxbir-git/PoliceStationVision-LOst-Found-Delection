@@ -1,0 +1,53 @@
+/* --- print: only the acknowledgement slip prints, nothing else --- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+
+  /* no backgrounds, no shadows — clean black-and-white print */
+  .print-area {
+    color: #000;
+    background: #fff;
+  }
+
+  .print-area .disclaimer-box {
+    border: 2px solid #000;
+    background: none;
+  }
+
+  .print-area .reg-number {
+    color: #000;
+  }
+
+  /* hide interactive elements inside the slip */
+  .print-area button,
+  .print-area .btn {
+    display: none !important;
+  }
+
+  /* force page breaks if needed */
+  .print-area {
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
